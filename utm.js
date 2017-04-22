@@ -241,8 +241,9 @@ var UTMToLatLon = notImpl("UTMToLatLon");
         var xnFrac = [];
         var nomin = [1.0,tf];
         var mult2 = [cf,1.0];
-        for(var i =0,var mult1 = 1; var Nfpow1 = Nf; i< 8;i++){
-            xnFrac[0] = nomin[i%2]/(mult1*Nfpow1 *mult2[i%2]);
+        var i,mult1,Nfpow1;
+        for(i =0,mult1 = 1,Nfpow1 = Nf; i< 8;i++){
+            xnFrac[i] = nomin[i%2]/(mult1*Nfpow1 *mult2[i%2]);
             mult1 *= i+2;
             Nfpow1 *= Nf;
         }
@@ -270,14 +271,14 @@ var UTMToLatLon = notImpl("UTMToLatLon");
         Nfpow *= Nf;   /* now equals Nf**8) */
         var x8frac = tf / (40320.0 * Nfpow);
         
-        console.log("mine: "+xnFrac[0]+", his: "+x1frac);
-        console.log("mine: "+xnFrac[1]+", his: "+x2frac);
-        console.log("mine: "+xnFrac[2]+", his: "+x3frac);
-        console.log("mine: "+xnFrac[3]+", his: "+x4frac);
-        console.log("mine: "+xnFrac[4]+", his: "+x5frac);
-        console.log("mine: "+xnFrac[5]+", his: "+x6frac);
-        console.log("mine: "+xnFrac[6]+", his: "+x7frac);
-        console.log("mine: "+xnFrac[7]+", his: "+x8frac);
+        console.log("same: "+(xnFrac[0] == x1frac));
+        console.log("same: "+(xnFrac[1] == x2frac));
+        console.log("same: "+(xnFrac[2] == x3frac));
+        console.log("same: "+(xnFrac[3] == x4frac));
+        console.log("same: "+(xnFrac[4] == x5frac));
+        console.log("same: "+(xnFrac[5] == x6frac));
+        console.log("same: "+(xnFrac[6] == x7frac));
+        console.log("same: "+(xnFrac[7] == x8frac));
         
         /* Precalculate polynomial coefficients for x**n.
            -- x**1 does not have a polynomial coefficient. */
