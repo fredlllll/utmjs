@@ -1,5 +1,5 @@
 /*
-For now most of the code comes from http://home.hiwaay.net/~taylorc/toolbox/geography/geoutm.html till i actually bother to understand the maths behind it. but finding instructions is hard
+For now most of the code comes from http://home.hiwaay.net/~taylorc/toolbox/geography/geoutm.html till i actually bother to understand the maths behind it. but finding clear instructions is hard
 */
 
 
