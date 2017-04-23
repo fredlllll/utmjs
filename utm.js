@@ -248,38 +248,6 @@ var UTMToLatLon = notImpl("UTMToLatLon");
             mult1 *= i+2;
             Nfpow1 *= Nf;
         }
-           
-        var x1frac = 1.0 / (Nfpow * cf);
-        
-        Nfpow *= Nf;   /* now equals Nf**2) */
-        var x2frac = tf / (2.0 * Nfpow);
-        
-        Nfpow *= Nf;   /* now equals Nf**3) */
-        var x3frac = 1.0 / (6.0 * Nfpow * cf);
-        
-        Nfpow *= Nf;   /* now equals Nf**4) */
-        var x4frac = tf / (24.0 * Nfpow);
-        
-        Nfpow *= Nf;   /* now equals Nf**5) */
-        var x5frac = 1.0 / (120.0 * Nfpow * cf);
-        
-        Nfpow *= Nf;   /* now equals Nf**6) */
-        var x6frac = tf / (720.0 * Nfpow);
-        
-        Nfpow *= Nf;   /* now equals Nf**7) */
-        var x7frac = 1.0 / (5040.0 * Nfpow * cf);
-        
-        Nfpow *= Nf;   /* now equals Nf**8) */
-        var x8frac = tf / (40320.0 * Nfpow);
-        
-        console.log("same: "+(xnFrac[0] == x1frac));
-        console.log("same: "+(xnFrac[1] == x2frac));
-        console.log("same: "+(xnFrac[2] == x3frac));
-        console.log("same: "+(xnFrac[3] == x4frac));
-        console.log("same: "+(xnFrac[4] == x5frac));
-        console.log("same: "+(xnFrac[5] == x6frac));
-        console.log("same: "+(xnFrac[6] == x7frac));
-        console.log("same: "+(xnFrac[7] == x8frac));
         
         /* Precalculate polynomial coefficients for x**n.
            -- x**1 does not have a polynomial coefficient. */
@@ -292,16 +260,16 @@ var UTMToLatLon = notImpl("UTMToLatLon");
         var x8poly = 1385.0 + 3633.0 * tf2 + 4095.0 * tf4 + 1575 * (tf4 * tf2);
         	
         /* Calculate latitude */
-        var lat = phif + x2frac * x2poly * (x * x)
-        	+ x4frac * x4poly * Math.pow (x, 4.0)
-        	+ x6frac * x6poly * Math.pow (x, 6.0)
-        	+ x8frac * x8poly * Math.pow (x, 8.0);
+        var lat = phif + xnFrac[1] * x2poly * (x * x)
+        	+ xnFrac[3] * x4poly * Math.pow (x, 4.0)
+        	+ xnFrac[5] * x6poly * Math.pow (x, 6.0)
+        	+ xnFrac[7] * x8poly * Math.pow (x, 8.0);
         	
         /* Calculate longitude */
-        var lon = lambda0 + x1frac * x
-        	+ x3frac * x3poly * Math.pow (x, 3.0)
-        	+ x5frac * x5poly * Math.pow (x, 5.0)
-        	+ x7frac * x7poly * Math.pow (x, 7.0);
+        var lon = lambda0 + xnFrac[0] * x
+        	+ xnFrac[2] * x3poly * Math.pow (x, 3.0)
+        	+ xnFrac[4] * x5poly * Math.pow (x, 5.0)
+        	+ xnFrac[6] * x7poly * Math.pow (x, 7.0);
         	
         return [lat,lon];
     }
