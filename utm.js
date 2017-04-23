@@ -19,6 +19,7 @@ var UTMToLatLon = notImpl("UTMToLatLon");
     var UTMScaleFactor = 0.9996;
     
     //zone - UTM zone to be used for calculating values for x and y. If zone is less than 1 or greater than 60, the routine will determine the appropriate zone from the value of lon.
+    //returns [x,y,zone,isSouthernHemisphere]
     LatLonToUTM = function(lat, lon, targetZone = 0)
     {
         var xy = [0,0];
@@ -37,7 +38,7 @@ var UTMToLatLon = notImpl("UTMToLatLon");
             xy[1] = xy[1] + 10000000.0;
         }
 
-        retval = [xy[0],xy[1],targetZone];
+        retval = [xy[0],xy[1],targetZone, lat < 0];
         return retval;
     }
     
