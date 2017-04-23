@@ -42,7 +42,7 @@ var UTMToLatLon = notImpl("UTMToLatLon");
         return retval;
     }
     
-    UTMToLatLon = function(x, y, zone, southernHemisphere)
+    UTMToLatLon = function(x, y, zone, isSouthernHemisphere)
     {
         var cmeridian;
         	
@@ -50,7 +50,7 @@ var UTMToLatLon = notImpl("UTMToLatLon");
         x /= UTMScaleFactor;
         	
         /* If in southern hemisphere, adjust y accordingly. */
-        if (southernHemisphere){
+        if (isSouthernHemisphere){
             y -= 10000000.0;
         }
         y /= UTMScaleFactor;
